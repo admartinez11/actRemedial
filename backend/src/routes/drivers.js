@@ -1,14 +1,14 @@
 import express from "express"
-import clientController from "../controllers/clientsController"
+import driversController from "../controllers/driversController"
 
 //usamos Router() de la librería express para definir los métodos HTTP a utilizar
 const router = express.Router();
 
 router.route("/")
-    .get(clientController.getClient);
+    .get(driversController.getDriver);
 
 router.route("/:id")
-    .put(clientController.updateClient)
-    .delete(clientController.deleteClient);
+    .put(driversController.updateDriver)
+    .delete(driversController.deleteDriver);
 
 export default router;

@@ -1,13 +1,13 @@
-import clientModel from "../models/clients.js";
+import driverModel from "../models/drivers";
 
 //Array de funciones
-const clientController ={};
+const driversController ={};
 
 //SELECT
-clientController.getClient = async (req, res) => {
+driversController.getDriver = async (req, res) => {
     try{
-        const clients = await clientModel.find();
-        return res.status(200).json(clients);
+        const drivers = await driverModel.find();
+        return res.status(200).json(drivers);
     }catch(error){
         console.log("error" + error);
         return res.status(500).json({message: "Internal serve error"})
@@ -15,15 +15,17 @@ clientController.getClient = async (req, res) => {
 };
 
 //UPDATE
-clientController.updateClient = async (req, res) => {
+driversController.updateDriver = async (req, res) => {
     try{
         let{
             name,
             lastName,
+            licenseNumber,
             email,
             password,
             phone,
             address,
+            isActive,
             isVerified,
             loginAttemps,
             timeOut,
@@ -33,20 +35,17 @@ clientController.updateClient = async (req, res) => {
         name = name?.trim()
         email = email?.trim()
 
-        //Valores requires
-        if(!name || !email || !password){
-            return res.starus(400).json({message: "Fields required"})
-        }
-
-        const clientUpdated = await clientModel.findByIdAndUpdate(
+        const driverUpdated = await driverModel.findByIdAndUpdate(
             req.params.id,
             {
                 name,
                 lastName,
+                licenseNumber,
                 email,
                 password,
                 phone,
                 address,
+                isActive,
                 isVerified,
                 loginAttemps,
                 timeOut,
@@ -54,11 +53,11 @@ clientController.updateClient = async (req, res) => {
             {new: true},
         );
 
-        if(!clientUpdated){
-            return res.status(404).json({message: "Client not found"})
+        if(!driverUpdated){
+            return res.status(404).json({message: "Driver not found"})
         }
 
-        return res.status(200).json({message: "Client updated"});
+        return res.status(200).json({message: "Driver updated"});
 
     } catch (error) {
         console.log("error" + error);
@@ -67,20 +66,20 @@ clientController.updateClient = async (req, res) => {
 };
 
 //ELIMINAR
-clientController.deleteClient = async (req, res) => {
+driversController.deleteDriver = async (req, res) => {
     try{
-        const deleteClient = clientModel.findByIdAndDelete(req.params.id);
+        const deleteDriver = driverModel.findByIdAndDelete(req.params.id);
 
         //Si no se elimina es por que no encontró el id
-        if(!deleteClient){
-            return res.status(404).json({message: "Client not found"})
+        if(!deleteDriver){
+            return res.status(404).json({message: "Driver not found"})
         }
 
-        return req.status(200).json({message: "Client deleted"});
+        return req.status(200).json({message: "Driver deleted"});
     }catch(error){
         console.log("error" + error);
         return res.status(500).json({message: "Internal serve error"});
     }
 };
 
-export default clientController;
+export default driversController;
