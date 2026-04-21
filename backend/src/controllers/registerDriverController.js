@@ -156,5 +156,5 @@ registerDriverController.verifyCode = async (req, res) => {
     }
 };
 
-export default registerClientController;  
+export default registerDriverController;  
 

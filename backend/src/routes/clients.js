@@ -1,5 +1,5 @@
 import express from "express"
-import clientController from "../controllers/clientsController"
+import clientController from "../controllers/clientsController.js"
 
 //usamos Router() de la librería express para definir los métodos HTTP a utilizar
 const router = express.Router();

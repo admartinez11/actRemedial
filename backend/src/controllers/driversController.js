@@ -1,4 +1,4 @@
-import driverModel from "../models/drivers";
+import driverModel from "../models/drivers.js";
 
 //Array de funciones
 const driversController ={};
